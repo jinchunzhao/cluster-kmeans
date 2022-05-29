@@ -1,17 +1,22 @@
 package com.jy;
 
-import com.jy.centroids.InitCentroidsFactoryContext;
+import com.jy.centroids.InitCentroidsFactory;
 import com.jy.centroids.InitCentroidsFunctionHandler;
-import com.jy.distance.DistanceFunctionFactoryContext;
+import com.jy.distance.DistanceFunctionFactory;
 import com.jy.distance.DistanceFunctionHandler;
 import com.jy.elbow.SseMethod;
 import com.jy.enums.DistanceFunctionEnum;
 import com.jy.enums.InitCentroidsEnum;
 import com.jy.utils.ListUtil;
 
-import java.io.*;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -159,7 +164,6 @@ public class ClusterSimpleKm {
     private static final Map<Integer, List<List<Double>>> CLUSTER_DATA_MAP = new HashMap<>();
 
 
-
     /**
      * 初始化中心点
      *
@@ -178,8 +182,8 @@ public class ClusterSimpleKm {
         if (this.numClusters > dataSize) {
             throw new RuntimeException("簇数K的值不能多于数据集的元素数量!");
         }
-
-        InitCentroidsFunctionHandler invokeHandler = InitCentroidsFactoryContext.getInvokeHandler(this.initCentroidsType);
+        InitCentroidsFactory centroidsFactory = InitCentroidsFactory.getInstance();
+        InitCentroidsFunctionHandler invokeHandler = centroidsFactory.getHandler(this.getInitCentroidsType());
         List<List<Double>> initCentroids = invokeHandler.initCentroids(dataList, this.seed, this.numClusters, CLUSTER_DATA_MAP);
 
         POINTS_CACHE.addAll(initCentroids);
@@ -194,7 +198,8 @@ public class ClusterSimpleKm {
     private void processKm(List<List<Double>> dataList) {
 
         int iterationCount = 0;
-        DistanceFunctionHandler handler = DistanceFunctionFactoryContext.getInvokeHandler(this.distanceCalcType);
+        DistanceFunctionFactory instance = DistanceFunctionFactory.getInstance();
+        DistanceFunctionHandler invokeHandler = instance.getHandler(this.distanceCalcType);
 
         SseMethod sesMethod = SseMethod.getInstance();
         // 自旋迭代
@@ -205,7 +210,7 @@ public class ClusterSimpleKm {
 
             List<Double> squaredSumErrors = new ArrayList<>();
             for (List<Double> Doubles : dataList) {
-                squaredSumErrors.add(dataClassify(Doubles, handler, sesMethod));
+                squaredSumErrors.add(dataClassify(Doubles, invokeHandler, sesMethod));
             }
             if (iterationCount >= this.maxIterations) {
                 this.squaredSumError = sesMethod.listElementSum(squaredSumErrors);
@@ -219,19 +224,20 @@ public class ClusterSimpleKm {
                 this.squaredSumError = sesMethod.listElementSum(squaredSumErrors);
             }
         }
-        orderClusterInstances();
+        orderClusterInstances(invokeHandler);
 
         this.maxIterations = iterationCount;
     }
 
     /**
      * 对每一簇中的实例进行排序
+     *
+     * @param invokeHandler 距离算法执行器
      */
-    private void orderClusterInstances() {
+    private void orderClusterInstances(DistanceFunctionHandler invokeHandler) {
         if (!this.preserveInstancesOrder) {
             return;
         }
-        DistanceFunctionHandler handler = DistanceFunctionFactoryContext.getInvokeHandler(this.getDistanceCalcType());
         Map<Integer, List<List<Double>>> clusterDataMap = new HashMap<>();
         for (int i = 0; i < POINTS_CACHE.size(); i++) {
             List<Double> points = POINTS_CACHE.get(i);
@@ -240,7 +246,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
-                Double f = handler.toClusterInstanceOrder(dataList, points);
+                Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
                 orderItemMap.put(j, f);
             }
             List<Map.Entry<Integer, Double>> orderList = orderItemMap.entrySet().stream()
@@ -373,7 +379,6 @@ public class ClusterSimpleKm {
     }
 
 
-
     /**
      * 简单K-means聚类算法运用
      *
@@ -389,6 +394,7 @@ public class ClusterSimpleKm {
         resultMap.put("numIterations", this.maxIterations);
         resultMap.put("squaredSumError", this.squaredSumError);
         resultMap.put("initCentroids", this.initCentroidsType);
+        resultMap.put("distanceCalcType",this.distanceCalcType);
         resultMap.put("initialStartPoints", INIT_POINTS);
         resultMap.put("clusterCentroids", POINTS_CACHE);
         resultMap.put("clusterData", CLUSTER_DATA_MAP);

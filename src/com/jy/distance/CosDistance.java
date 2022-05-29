@@ -1,6 +1,8 @@
 package com.jy.distance;
 
 
+import com.jy.plugin.ClusterArithmeticRegion;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Objects;
  * @version 1.0
  * @date 2022-02-03 10:55
  */
+@ClusterArithmeticRegion(factionType = "cosDistance")
 public class CosDistance implements DistanceFunctionHandler {
 
 

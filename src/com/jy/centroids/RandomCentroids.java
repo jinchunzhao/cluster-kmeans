@@ -1,5 +1,7 @@
 package com.jy.centroids;
 
+import com.jy.plugin.ClusterArithmeticRegion;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +14,8 @@ import java.util.Random;
  * @version 1.0
  * @date 2022-02-03 10:54
  */
-public class RandomCentroids implements InitCentroidsFunctionHandler{
+@ClusterArithmeticRegion(factionType = "random")
+public class RandomCentroids implements InitCentroidsFunctionHandler {
 
 
     @Override
@@ -24,10 +27,9 @@ public class RandomCentroids implements InitCentroidsFunctionHandler{
     /**
      * 随机产生k个中心点
      *
-     * @param dataList
-     *        元数据
+     * @param dataList 元数据
      */
-    private List<List<Double>> randomCenterPoint(List<List<Double>> dataList, int seed, int numClusters, Map<Integer,List<List<Double>>> clusterDataMap ){
+    private List<List<Double>> randomCenterPoint(List<List<Double>> dataList, int seed, int numClusters, Map<Integer, List<List<Double>>> clusterDataMap) {
 
         List<List<Double>> initPoints = new ArrayList<>();
         int dataSize = dataList.size();
@@ -38,7 +40,7 @@ public class RandomCentroids implements InitCentroidsFunctionHandler{
         random.setSeed(seed);
 
         for (int i = 0; i < numClusters; i++) {
-            spinRandom(dataSize,randoms,random);
+            spinRandom(dataSize, randoms, random);
             List<Double> point = dataList.get(randoms.get(randoms.size() - 1));
             initPoints.add(point);
             clusterDataMap.put(i, new ArrayList<>());
@@ -51,14 +53,11 @@ public class RandomCentroids implements InitCentroidsFunctionHandler{
     /**
      * 自旋获取不重复的簇中心坐标
      *
-     * @param dataSize
-     *        数据集的元素数量
-     * @param randoms
-     *        随机数集合
-     * @param random
-     *        Random实例
+     * @param dataSize 数据集的元素数量
+     * @param randoms  随机数集合
+     * @param random   Random实例
      */
-    private void spinRandom(int dataSize,List<Integer> randoms,Random random){
+    private void spinRandom(int dataSize, List<Integer> randoms, Random random) {
         while (true) {
             int r = random.nextInt(dataSize - 1);
             if (!randoms.contains(r)) {

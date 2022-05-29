@@ -1,5 +1,7 @@
 package com.jy.enums;
 
+import java.util.Objects;
+
 /**
  * 初始化质心算法枚举
  *
@@ -23,5 +25,16 @@ public enum InitCentroidsEnum {
     public String getCode() {
         return code;
     }
+
+    public static InitCentroidsEnum machCode(String code){
+        InitCentroidsEnum[] centroidsEnums = InitCentroidsEnum.values();
+        for (InitCentroidsEnum centroidsEnum : centroidsEnums) {
+            if (Objects.equals(centroidsEnum.getCode(),code)){
+                return centroidsEnum;
+            }
+        }
+        return null;
+    }
+
 
 }

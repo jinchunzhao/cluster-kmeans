@@ -1,5 +1,7 @@
 package com.jy.distance;
 
+import com.jy.plugin.ClusterArithmeticRegion;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022-02-03 10:45
  */
+@ClusterArithmeticRegion(factionType = "manhattanDistance")
 public class ManhattanDistance implements DistanceFunctionHandler {
 
     @Override

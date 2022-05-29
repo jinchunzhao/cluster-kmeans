@@ -29,6 +29,14 @@ public enum DistanceFunctionEnum {
         return code;
     }
 
+    /**
+     * 根据code匹配枚举
+     *
+     * @param code
+     *        code
+     * @return
+     *        枚举
+     */
     public static DistanceFunctionEnum machCode(String code){
         for (DistanceFunctionEnum distanceAlgorithmEnum : DistanceFunctionEnum.values()){
             if (Objects.equals(distanceAlgorithmEnum.getCode(), code)){

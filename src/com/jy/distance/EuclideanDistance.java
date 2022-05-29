@@ -1,5 +1,7 @@
 package com.jy.distance;
 
+import com.jy.plugin.ClusterArithmeticRegion;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022-02-03 10:55
  */
+@ClusterArithmeticRegion(factionType = "euclideanDistance")
 public class EuclideanDistance implements DistanceFunctionHandler {
 
 
