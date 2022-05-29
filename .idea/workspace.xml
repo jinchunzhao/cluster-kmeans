@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="java实现聚类k-means算法">
-      <change afterPath="$PROJECT_DIR$/src/com/jy/centroids/InitCentroidsFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/jy/plugin/ClusterArithmeticRegion.java" afterDir="false" />
+    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="优化算法选型策略模式">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/ClusterSimpleKm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/ClusterSimpleKm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/centroids/InitCentroidsFactoryContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/centroids/RandomCentroids.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/centroids/RandomCentroids.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/enums/InitCentroidsEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/enums/InitCentroidsEnum.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/centroids/InitCentroidsFactoryContext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/centroids/RandomCentroids.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/centroids/RandomCentroids.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/CosDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/CosDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionFactoryContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionFactoryContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/enums/DistanceFunctionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/enums/DistanceFunctionEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/enums/InitCentroidsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/enums/InitCentroidsEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,17 +72,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.KmeansTest" />
@@ -113,7 +89,8 @@
       <updated>1653791828463</updated>
       <workItem from="1653791830203" duration="6508000" />
       <workItem from="1653807665457" duration="1035000" />
-      <workItem from="1653810031141" duration="356000" />
+      <workItem from="1653810031141" duration="4934000" />
+      <workItem from="1653824563341" duration="864000" />
     </task>
     <task id="LOCAL-00001" summary="java实现聚类k-means算法">
       <created>1653794374800</created>
@@ -122,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653794374800</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="优化算法选型策略模式">
+      <created>1653810686629</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653810686629</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,7 +126,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="java实现聚类k-means算法" />
-    <option name="LAST_COMMIT_MESSAGE" value="java实现聚类k-means算法" />
+    <MESSAGE value="优化算法选型策略模式" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化算法选型策略模式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -151,11 +136,6 @@
           <url>file://$PROJECT_DIR$/src/com/jy/test/KmeansTest.java</url>
           <line>72</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/test/KmeansTest.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

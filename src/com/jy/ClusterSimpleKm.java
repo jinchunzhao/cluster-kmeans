@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -334,6 +335,8 @@ public class ClusterSimpleKm {
         POINTS_HISTORY_CACHE.addAll(ListUtil.deepCopy(POINTS_CACHE));
         POINTS_CACHE.clear();
 
+        boolean emptyPoint = false;
+
         for (Map.Entry<Integer, List<List<Double>>> entry : CLUSTER_DATA_MAP.entrySet()) {
             List<List<Double>> dataList = entry.getValue();
             List<Double> newPoints = new ArrayList<>();
@@ -354,10 +357,60 @@ public class ClusterSimpleKm {
                 Double v1 = new BigDecimal(v).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
                 newPoints.set(k, v1);
             }
-//            if (CollectionUtils.isEmpty(newPoints)) {
-//                continue;
-//            }
+            if (newPoints.size() <= 0) {
+                 emptyPoint = true;
+            }
             POINTS_CACHE.add(newPoints);
+        }
+
+        if (emptyPoint) {
+            // TODO 该方案存在空簇
+            spinDealEmptyPoint();
+
+        }
+
+    }
+
+    /**
+     * 自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）
+     * 出现空簇的问题
+     */
+    private void spinDealEmptyPoint(){
+        List<Double> firstNotEmpty = POINTS_CACHE.stream().filter(item -> item.size() > 0).findFirst().get();
+        int pointCacheSize = POINTS_CACHE.size();
+        int firstNotEmptySize = firstNotEmpty.size();
+        while (true){
+            Optional<List<Double>> optional = POINTS_CACHE.stream().filter(item -> item.size() == 0).findFirst();
+            if (!optional.isPresent()){
+                return;
+            }
+            List<Double> listItem = new ArrayList<>(firstNotEmpty.size());
+            for (int k = 0; k < firstNotEmptySize; k++) {
+                listItem.add(null);
+            }
+            for (int i = 0; i < POINTS_CACHE.size(); i++) {
+                List<Double> points = POINTS_CACHE.get(i);
+                if (points.size() <= 0) {
+
+                    continue;
+                }
+
+                for (int j = 0; j < listItem.size(); j++) {
+                    Double point = points.get(j);
+                    Double b = Objects.isNull(listItem.get(j)) ? listItem.set(j,point) : listItem.set(j,listItem.get(j) + point);
+                }
+            }
+            for (int i = 0; i < listItem.size(); i++) {
+                Double aDouble = listItem.get(i);
+                listItem.set(i, new BigDecimal(aDouble / pointCacheSize).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue());
+            }
+            for (int i = 0; i < POINTS_CACHE.size(); i++) {
+                List<Double> points = POINTS_CACHE.get(i);
+                if (points.size() <= 0) {
+                    POINTS_CACHE.set(i, listItem);
+                    break;
+                }
+            }
         }
     }
 
