@@ -11,6 +11,8 @@ import com.jy.utils.ListUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -231,6 +234,44 @@ public class ClusterSimpleKm {
     }
 
     /**
+     * 自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）
+     * 出现空簇的问题
+     */
+    private void spinDealEmptyCluster(DistanceFunctionHandler invokeHandler){
+        long emptyCount = CLUSTER_DATA_MAP.entrySet().stream().filter(item -> item.getValue().size() == 0).count();
+        if (emptyCount <= 0){
+            return;
+        }
+
+        List<List<Double>> orderList = new ArrayList<>();
+        for (Map.Entry<Integer, List<List<Double>>> entry : CLUSTER_DATA_MAP.entrySet()){
+            Integer pointIndex = entry.getKey();
+            List<List<Double>> clusterDataList = entry.getValue();
+            if (clusterDataList.size() == 0) {
+                continue;
+            }
+            List<Double> points = POINTS_CACHE.get(pointIndex);
+
+
+            List<Double> orderItemList = new ArrayList<>();
+            // 根据不同类型的距离算法计算最小误差
+            for (int j = 0; j < clusterDataList.size(); j++) {
+                List<Double> dataList = clusterDataList.get(j);
+                Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
+                orderItemList.add(f);
+            }
+            orderItemList = orderItemList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+            orderList.add(orderItemList);
+        }
+        int size = orderList.size();
+//        spin
+        // TODO 从orderList中随机选择作为空簇的质心，进行迭代
+
+
+    }
+
+
+    /**
      * 对每一簇中的实例进行排序
      *
      * @param invokeHandler 距离算法执行器
@@ -324,6 +365,7 @@ public class ClusterSimpleKm {
         POINTS_HISTORY_CACHE.clear();
         return Boolean.FALSE;
     }
+
 
     /**
      * 计算新的中心点

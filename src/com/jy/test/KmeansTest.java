@@ -64,7 +64,7 @@ public class KmeansTest {
     }
 
     public static void main(String[] args) {
-        String distanceType = DistanceFunctionEnum.MANHATTAN_DISTANCE.getCode();
+        String distanceType = DistanceFunctionEnum.COS_DISTANCE.getCode();
         Integer maxIterations = 100;
         int k = 3;
 

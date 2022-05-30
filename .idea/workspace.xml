@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）">
+    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="项目简单说明">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/ClusterSimpleKm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/ClusterSimpleKm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/test/KmeansTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/test/KmeansTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,15 +71,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -104,7 +100,9 @@
       <workItem from="1653791830203" duration="6508000" />
       <workItem from="1653807665457" duration="1035000" />
       <workItem from="1653810031141" duration="4934000" />
-      <workItem from="1653824563341" duration="2749000" />
+      <workItem from="1653824563341" duration="3598000" />
+      <workItem from="1653828182165" duration="209000" />
+      <workItem from="1653911921238" duration="2126000" />
     </task>
     <task id="LOCAL-00001" summary="java实现聚类k-means算法">
       <created>1653794374800</created>
@@ -127,7 +125,42 @@
       <option name="project" value="LOCAL" />
       <updated>1653825734858</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="项目简单说明">
+      <created>1653827334072</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653827334072</updated>
+    </task>
+    <task id="LOCAL-00005" summary="项目简单说明">
+      <created>1653827380374</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653827380374</updated>
+    </task>
+    <task id="LOCAL-00006" summary="项目简单说明">
+      <created>1653827409308</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653827409308</updated>
+    </task>
+    <task id="LOCAL-00007" summary="项目简单说明">
+      <created>1653827428318</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653827428318</updated>
+    </task>
+    <task id="LOCAL-00008" summary="项目简单说明">
+      <created>1653827434456</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1653827434456</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,7 +182,8 @@
     <MESSAGE value="java实现聚类k-means算法" />
     <MESSAGE value="优化算法选型策略模式" />
     <MESSAGE value="自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）" />
-    <option name="LAST_COMMIT_MESSAGE" value="自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）" />
+    <MESSAGE value="项目简单说明" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目简单说明" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -158,6 +192,11 @@
           <url>file://$PROJECT_DIR$/src/com/jy/test/KmeansTest.java</url>
           <line>72</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
