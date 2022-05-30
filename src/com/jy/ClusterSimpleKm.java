@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -221,6 +222,10 @@ public class ClusterSimpleKm {
 
                 break;
             }
+            boolean emptyCluster = spinDealEmptyCluster(invokeHandler);
+            if (emptyCluster){
+                continue;
+            }
             //计算新的中心点。
             getNewPoint();
             isContinueToCluster = continueToCluster();
@@ -237,10 +242,10 @@ public class ClusterSimpleKm {
      * 自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）
      * 出现空簇的问题
      */
-    private void spinDealEmptyCluster(DistanceFunctionHandler invokeHandler){
+    private boolean spinDealEmptyCluster(DistanceFunctionHandler invokeHandler){
         long emptyCount = CLUSTER_DATA_MAP.entrySet().stream().filter(item -> item.getValue().size() == 0).count();
         if (emptyCount <= 0){
-            return;
+            return false;
         }
 
         List<List<Double>> orderList = new ArrayList<>();
@@ -255,6 +260,7 @@ public class ClusterSimpleKm {
 
             List<Double> orderItemList = new ArrayList<>();
             // 根据不同类型的距离算法计算最小误差
+            // TODO 此处有bug, 应该只拿到一个list
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
                 Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
@@ -263,11 +269,48 @@ public class ClusterSimpleKm {
             orderItemList = orderItemList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
             orderList.add(orderItemList);
         }
-        int size = orderList.size();
+        List<Integer> randoms = new ArrayList<>();
 //        spin
         // TODO 从orderList中随机选择作为空簇的质心，进行迭代
+        Random random = new Random();
+        System.out.println("c   -0-------"+emptyCount);
+        random.setSeed(emptyCount);
+        for (int i = 0; i < emptyCount; i++) {
+            spinRandom(Long.valueOf(emptyCount).intValue(), randoms, random);
+        }
 
+        for (Map.Entry<Integer, List<List<Double>>> entry : CLUSTER_DATA_MAP.entrySet()) {
+            Integer pointIndex = entry.getKey();
+            if (entry.getValue().size() <= 0){
+                Integer pointIndex1 = getPointIndex(randoms);
+                if (pointIndex1 != null) {
+                    POINTS_CACHE.set(pointIndex,orderList.get(pointIndex1));
+                }
+            }
+        }
+        return true;
 
+    }
+
+    private Integer getPointIndex(List<Integer> randoms){
+        Iterator<Integer> iterator = randoms.iterator();
+        while (iterator.hasNext()) {
+            Integer aa = iterator.next();
+            iterator.remove();
+            return aa;
+
+        }
+        return null;
+    }
+
+    private void spinRandom(int dataSize, List<Integer> randoms, Random random) {
+        while (true) {
+            int r = random.nextInt(dataSize);
+            if (!randoms.contains(r)) {
+                randoms.add(r);
+                break;
+            }
+        }
     }
 
 
