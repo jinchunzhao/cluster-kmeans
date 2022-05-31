@@ -226,11 +226,17 @@ public class ClusterSimpleKm {
             if (emptyCluster){
                 continue;
             }
-            //计算新的中心点。
-            getNewPoint();
+            if (POINTS_HISTORY_CACHE.size() == 0){
+                //计算新的中心点。
+                getNewPoint();
+            }
+
             isContinueToCluster = continueToCluster();
             if (!isContinueToCluster) {
                 this.squaredSumError = sesMethod.listElementSum(squaredSumErrors);
+            }else {
+                //计算新的中心点。
+                getNewPoint();
             }
         }
         orderClusterInstances(invokeHandler);
@@ -248,43 +254,58 @@ public class ClusterSimpleKm {
             return false;
         }
 
-        List<List<Double>> orderList = new ArrayList<>();
-        for (Map.Entry<Integer, List<List<Double>>> entry : CLUSTER_DATA_MAP.entrySet()){
-            Integer pointIndex = entry.getKey();
-            List<List<Double>> clusterDataList = entry.getValue();
+        List<List<Double>> orderClusterList = new ArrayList<>();
+        for (Map.Entry<Integer, List<List<Double>>> clusterEntry : CLUSTER_DATA_MAP.entrySet()){
+            Integer pointIndex = clusterEntry.getKey();
+            List<List<Double>> clusterDataList = clusterEntry.getValue();
             if (clusterDataList.size() == 0) {
                 continue;
             }
             List<Double> points = POINTS_CACHE.get(pointIndex);
 
 
-            List<Double> orderItemList = new ArrayList<>();
+            Map<Integer, Double> orderItemMap = new HashMap<>();
             // 根据不同类型的距离算法计算最小误差
-            // TODO 此处有bug, 应该只拿到一个list
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
                 Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
-                orderItemList.add(f);
+                orderItemMap.put(j, f);
             }
-            orderItemList = orderItemList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-            orderList.add(orderItemList);
+            List<Map.Entry<Integer, Double>> orderList = orderItemMap.entrySet().stream()
+                    .sorted((entry1, entry2) -> entry1.getValue().compareTo(entry2.getValue()))
+                    .collect(Collectors.toList());
+
+
+            Map.Entry<Integer, Double> doubleEntry = orderList.get(orderList.size() - 1);
+            List<Double> list = clusterDataList.get(doubleEntry.getKey());
+            orderClusterList.add(list);
         }
-        List<Integer> randoms = new ArrayList<>();
-//        spin
-        // TODO 从orderList中随机选择作为空簇的质心，进行迭代
-        Random random = new Random();
-        System.out.println("c   -0-------"+emptyCount);
-        random.setSeed(emptyCount);
-        for (int i = 0; i < emptyCount; i++) {
-            spinRandom(Long.valueOf(emptyCount).intValue(), randoms, random);
+
+
+        Map<String, Double> orderItemMap = new HashMap<>();
+
+        for (int i = 0; i < POINTS_CACHE.size(); i++) {
+            List<Double> points = POINTS_CACHE.get(i);
+
+            // 根据不同类型的距离算法计算最小误差
+            for (int j = 0; j < orderClusterList.size(); j++) {
+                List<Double> dataList = orderClusterList.get(j);
+                Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
+                orderItemMap.put(i+","+j, f);
+            }
+
         }
+
+        List<Map.Entry<String, Double>> orderList = orderItemMap.entrySet().stream()
+                .sorted((entry1, entry2) -> entry1.getValue().compareTo(entry2.getValue()))
+                .collect(Collectors.toList());
 
         for (Map.Entry<Integer, List<List<Double>>> entry : CLUSTER_DATA_MAP.entrySet()) {
             Integer pointIndex = entry.getKey();
             if (entry.getValue().size() <= 0){
-                Integer pointIndex1 = getPointIndex(randoms);
+                Integer pointIndex1 = getPointIndex(orderList);
                 if (pointIndex1 != null) {
-                    POINTS_CACHE.set(pointIndex,orderList.get(pointIndex1));
+                    POINTS_CACHE.set(pointIndex,orderClusterList.get(pointIndex1));
                 }
             }
         }
@@ -292,13 +313,19 @@ public class ClusterSimpleKm {
 
     }
 
-    private Integer getPointIndex(List<Integer> randoms){
-        Iterator<Integer> iterator = randoms.iterator();
-        while (iterator.hasNext()) {
-            Integer aa = iterator.next();
-            iterator.remove();
-            return aa;
+    /**
+     * 获取质心的下标
+     *
+     * @param list
+     * @return
+     */
+    private Integer getPointIndex(List<Map.Entry<String, Double>> list){
 
+        for (int i = list.size() - 1; i >= 0; i--) {
+            Map.Entry<String, Double> entry = list.get(i);
+            String index = entry.getKey().split(",")[1];
+            list.remove(i);
+            return Integer.parseInt(index);
         }
         return null;
     }
