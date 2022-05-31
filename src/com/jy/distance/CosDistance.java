@@ -57,7 +57,7 @@ public class CosDistance implements DistanceFunctionHandler {
                 sum2 += point * point;
                 sum3 += data * data;
             }
-            double result = sum1 / (Math.sqrt(sum2) + Math.sqrt(sum3));
+            double result = sum1 / (Math.sqrt(sum2) * Math.sqrt(sum3));
             distanceList.add(cosDistancesSqrt(result));
         }
 
@@ -98,7 +98,7 @@ public class CosDistance implements DistanceFunctionHandler {
      *        计算的结果
      */
     private Double cosDistancesSqrt(Double reduce){
-        return BigDecimal.valueOf(Math.sqrt(Math.abs(reduce))).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+        return BigDecimal.valueOf(reduce).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
 

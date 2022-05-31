@@ -66,7 +66,7 @@ public class KmeansTest {
     public static void main(String[] args) {
         String distanceType = DistanceFunctionEnum.COS_DISTANCE.getCode();
         Integer maxIterations = 100;
-        int k = 3;
+        int k = 5;
 
 
         List<List<Double>> dataList = loadData();
