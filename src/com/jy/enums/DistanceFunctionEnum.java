@@ -17,7 +17,7 @@ public enum DistanceFunctionEnum {
      */
     EUCLIDEAN_DISTANCE("euclideanDistance"),
     MANHATTAN_DISTANCE("manhattanDistance"),
-    COS_DISTANCE("cosDistance");
+    CHEBYSHEV_DISTANCE("chebyshevDistance");
 
     private final String code;
 
