@@ -27,6 +27,22 @@ public class EuclideanDistance implements DistanceFunctionHandler {
         return toEuclideanDistanceOrder(dataList, points);
     }
 
+    @Override
+    public Double getAmongSampleDistance(List<Double> dataList1, List<Double> dataList2) {
+        List<Double> list = new ArrayList<Double>();
+        int size = dataList2.size();
+        for (int i = 0; i < size; i++) {
+            Double data1 = dataList1.get(i);
+            Double data2 = dataList2.get(i);
+            list.add(euclideanDistancePow(data1, data2));
+        }
+        // 数据求和
+        Double reduce = listElementSum(list);
+        double sqrt = Math.sqrt(Math.abs(reduce));
+        double distance = BigDecimal.valueOf(sqrt).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return distance;
+    }
+
 
     /**
      * 通过欧式距离算法实现最小误差的计算

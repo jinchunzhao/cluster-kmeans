@@ -81,7 +81,7 @@ public class KmeansTest {
 //        clusterSimpleKm.setSeed(100);
 
 
-        Map<String, Object> resultMap = clusterSimpleKm.callSimpleKmeansCluster(dataList);
+        Map<String, Object> resultMap = clusterSimpleKm.callSimpleKMeansCluster(dataList);
 
         System.out.println("聚类后的数据：" + resultMap.toString());
     }

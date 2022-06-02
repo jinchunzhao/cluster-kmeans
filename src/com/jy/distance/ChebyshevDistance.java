@@ -24,6 +24,20 @@ public class ChebyshevDistance implements DistanceFunctionHandler {
         return toManhattanDistanceOrder(dataList, points);
     }
 
+    @Override
+    public Double getAmongSampleDistance(List<Double> dataList1, List<Double> dataList2) {
+        List<Double> list = new ArrayList<Double>();
+        int size = dataList2.size();
+        for (int i = 0; i < size; i++) {
+            Double data1 = dataList1.get(i);
+            Double data2 = dataList2.get(i);
+            double v = Math.abs(data1 - data2);
+            list.add(v);
+        }
+        // 获取最大值
+        return list.stream().mapToDouble(item -> item).max().getAsDouble();
+    }
+
 
     /**
      * 通过切比雪夫距离算法实现最小误差的计算

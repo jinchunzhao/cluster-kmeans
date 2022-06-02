@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="余弦相似度有bug">
-      <change afterPath="$PROJECT_DIR$/src/com/jy/distance/ChebyshevDistance.java" afterDir="false" />
+    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="切比雪夫距离算法">
+      <change afterPath="$PROJECT_DIR$/src/com/jy/effect/SilhouetteCoefficient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/distance/CosDistance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/distance/CosDistance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/test/KmeansTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/test/KmeansTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/CosDistance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/enums/DistanceFunctionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/enums/DistanceFunctionEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ChebyshevDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/ChebyshevDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/elbow/SseMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/effect/SseMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,13 +77,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,7 +112,8 @@
       <workItem from="1653828182165" duration="209000" />
       <workItem from="1653911921238" duration="3761000" />
       <workItem from="1653997384520" duration="3450000" />
-      <workItem from="1654085004815" duration="531000" />
+      <workItem from="1654085004815" duration="2064000" />
+      <workItem from="1654169063337" duration="2338000" />
     </task>
     <task id="LOCAL-00001" summary="java实现聚类k-means算法">
       <created>1653794374800</created>
@@ -201,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654000771553</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="切比雪夫距离算法">
+      <created>1654085723152</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1654085723152</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +238,8 @@
     <MESSAGE value="项目简单说明" />
     <MESSAGE value="将每个簇距离质心最远的样本挑出，随机作为空簇的质心" />
     <MESSAGE value="余弦相似度有bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="余弦相似度有bug" />
+    <MESSAGE value="切比雪夫距离算法" />
+    <option name="LAST_COMMIT_MESSAGE" value="切比雪夫距离算法" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -238,8 +251,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java</url>
-          <line>333</line>
+          <line>338</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/jy/effect/SseMethod.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

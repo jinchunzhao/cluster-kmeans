@@ -44,4 +44,16 @@ public interface DistanceFunctionHandler {
      *        最小误差
      */
     Double toClusterInstanceOrder(List<Double> dataList,List<Double> points);
+
+    /**
+     * 获取样本间的距离
+     *
+     * @param dataList1
+     *        样本1
+     * @param dataList2
+     *        非样本1
+     * @return
+     *        距离
+     */
+    Double getAmongSampleDistance(List<Double> dataList1, List<Double> dataList2);
 }

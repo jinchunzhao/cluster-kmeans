@@ -4,17 +4,15 @@ import com.jy.centroids.InitCentroidsFactory;
 import com.jy.centroids.InitCentroidsFunctionHandler;
 import com.jy.distance.DistanceFunctionFactory;
 import com.jy.distance.DistanceFunctionHandler;
-import com.jy.elbow.SseMethod;
+import com.jy.effect.SilhouetteCoefficient;
+import com.jy.effect.SseMethod;
 import com.jy.enums.DistanceFunctionEnum;
 import com.jy.enums.InitCentroidsEnum;
 import com.jy.utils.ListUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +72,11 @@ public class ClusterSimpleKm {
      * 平方和误差
      */
     private Double squaredSumError;
+
+    /**
+     * 轮廓系数
+     */
+    private Double silhouetteCoefficient;
 
     public Integer getNumClusters() {
         return numClusters;
@@ -204,7 +207,7 @@ public class ClusterSimpleKm {
 
         int iterationCount = 0;
         DistanceFunctionFactory instance = DistanceFunctionFactory.getInstance();
-        DistanceFunctionHandler invokeHandler = instance.getHandler(this.distanceCalcType);
+        DistanceFunctionHandler distanceHandler = instance.getHandler(this.distanceCalcType);
 
         SseMethod sesMethod = SseMethod.getInstance();
         // 自旋迭代
@@ -215,14 +218,14 @@ public class ClusterSimpleKm {
 
             List<Double> squaredSumErrors = new ArrayList<>();
             for (List<Double> Doubles : dataList) {
-                squaredSumErrors.add(dataClassify(Doubles, invokeHandler, sesMethod));
+                squaredSumErrors.add(dataClassify(Doubles, distanceHandler, sesMethod));
             }
             if (iterationCount >= this.maxIterations) {
                 this.squaredSumError = sesMethod.listElementSum(squaredSumErrors);
 
                 break;
             }
-            boolean emptyCluster = spinDealEmptyCluster(invokeHandler);
+            boolean emptyCluster = spinDealEmptyCluster(distanceHandler);
             if (emptyCluster){
                 continue;
             }
@@ -239,7 +242,9 @@ public class ClusterSimpleKm {
                 getNewPoint();
             }
         }
-        orderClusterInstances(invokeHandler);
+        SilhouetteCoefficient silhouetteCoefficient = SilhouetteCoefficient.getInstance();
+        this.silhouetteCoefficient = silhouetteCoefficient.getSilhouetteScore(distanceHandler, CLUSTER_DATA_MAP);;
+        orderClusterInstances(distanceHandler);
 
         this.maxIterations = iterationCount;
     }
@@ -248,7 +253,7 @@ public class ClusterSimpleKm {
      * 自旋处理空的中心点（通过取其它中心的的平均值作为新的中心点）
      * 出现空簇的问题
      */
-    private boolean spinDealEmptyCluster(DistanceFunctionHandler invokeHandler){
+    private boolean spinDealEmptyCluster(DistanceFunctionHandler distanceHandler){
         long emptyCount = CLUSTER_DATA_MAP.entrySet().stream().filter(item -> item.getValue().size() == 0).count();
         if (emptyCount <= 0){
             return false;
@@ -268,7 +273,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
-                Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
+                Double f = distanceHandler.toClusterInstanceOrder(dataList, points);
                 orderItemMap.put(j, f);
             }
             List<Map.Entry<Integer, Double>> orderList = orderItemMap.entrySet().stream()
@@ -290,7 +295,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < orderClusterList.size(); j++) {
                 List<Double> dataList = orderClusterList.get(j);
-                Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
+                Double f = distanceHandler.toClusterInstanceOrder(dataList, points);
                 orderItemMap.put(i+","+j, f);
             }
 
@@ -346,7 +351,7 @@ public class ClusterSimpleKm {
      *
      * @param invokeHandler 距离算法执行器
      */
-    private void orderClusterInstances(DistanceFunctionHandler invokeHandler) {
+    private void orderClusterInstances(DistanceFunctionHandler distanceHandler) {
         if (!this.preserveInstancesOrder) {
             return;
         }
@@ -358,7 +363,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
-                Double f = invokeHandler.toClusterInstanceOrder(dataList, points);
+                Double f = distanceHandler.toClusterInstanceOrder(dataList, points);
                 orderItemMap.put(j, f);
             }
             List<Map.Entry<Integer, Double>> orderList = orderItemMap.entrySet().stream()
@@ -380,12 +385,12 @@ public class ClusterSimpleKm {
      * 对数据进行分类处理
      *
      * @param dataList  元数据
-     * @param handler   最小误差距离算法
+     * @param distanceHandler   最小误差距离算法
      * @param sseMethod SSE算法实例
      */
-    private Double dataClassify(List<Double> dataList, DistanceFunctionHandler handler, SseMethod sseMethod) {
+    private Double dataClassify(List<Double> dataList, DistanceFunctionHandler distanceHandler, SseMethod sseMethod) {
 
-        List<Double> distanceList = handler.toDistance(dataList, POINTS_CACHE);
+        List<Double> distanceList = distanceHandler.toDistance(dataList, POINTS_CACHE);
 
         // 获取集合中最新值的下标
         OptionalInt optionalInt = IntStream.range(0, distanceList.size())
@@ -550,7 +555,7 @@ public class ClusterSimpleKm {
      * @param dataList 元数据
      * @return 聚簇的数据集合
      */
-    public Map<String, Object> callSimpleKmeansCluster(List<List<Double>> dataList) {
+    public Map<String, Object> callSimpleKMeansCluster(List<List<Double>> dataList) {
         initCenterPoint(dataList);
         processKm(dataList);
 
@@ -560,6 +565,7 @@ public class ClusterSimpleKm {
         resultMap.put("squaredSumError", this.squaredSumError);
         resultMap.put("initCentroids", this.initCentroidsType);
         resultMap.put("distanceCalcType",this.distanceCalcType);
+        resultMap.put("silhouetteCoefficient",this.silhouetteCoefficient);
         resultMap.put("initialStartPoints", INIT_POINTS);
         resultMap.put("clusterCentroids", POINTS_CACHE);
         resultMap.put("clusterData", CLUSTER_DATA_MAP);
