@@ -349,7 +349,7 @@ public class ClusterSimpleKm {
     /**
      * 对每一簇中的实例进行排序
      *
-     * @param invokeHandler 距离算法执行器
+     * @param distanceHandler 距离算法执行器
      */
     private void orderClusterInstances(DistanceFunctionHandler distanceHandler) {
         if (!this.preserveInstancesOrder) {
