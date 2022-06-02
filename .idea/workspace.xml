@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="cluster-kmeans:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="切比雪夫距离算法">
-      <change afterPath="$PROJECT_DIR$/src/com/jy/effect/SilhouetteCoefficient.java" afterDir="false" />
+    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="聚类效果：轮廓系数">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ChebyshevDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/ChebyshevDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/elbow/SseMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/effect/SseMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/ClusterSimpleKm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/centroids/InitCentroidsFunctionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/centroids/RandomCentroids.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/distance/DistanceFunctionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/distance/EuclideanDistance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/distance/ManhattanDistance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/elbow/SseMethod.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/enums/DistanceFunctionEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/enums/InitCentroidsEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/test/KmeansTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/test/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/test/data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cluster-kmeans/com/jy/utils/ListUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/centroids/InitCentroidsFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/InitCentroidsFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/centroids/InitCentroidsFunctionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/InitCentroidsFunctionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/centroids/RandomCentroids.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/RandomCentroids.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ChebyshevDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/ChebyshevDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/DistanceFunctionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/DistanceFunctionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/DistanceFunctionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/EuclideanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/distance/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/ManhattanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/effect/SilhouetteCoefficient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/effect/SilhouetteCoefficient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/effect/SseMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/effect/SseMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/enums/DistanceFunctionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/enums/DistanceFunctionEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/enums/InitCentroidsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/enums/InitCentroidsEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/plugin/ClusterArithmeticRegion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/plugin/ClusterArithmeticRegion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/test/KmeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/test/data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/utils/ListUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/utils/ListUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +67,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.22229868" />
+    <property name="project.structure.side.proportion" value="0.7637168" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -50,13 +79,13 @@
       <recent name="F:\soundCode\cluster-kmeans\src\com\jy" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.KmeansTest">
+  <component name="RunManager" selected="Application.MeansTest">
     <configuration name="InitCentroidsFactory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.jy.centroids.InitCentroidsFactory" />
+      <option name="MAIN_CLASS_NAME" value="com.jy.cluster.centroids.InitCentroidsFactory" />
       <module name="cluster-kmeans" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.jy.centroids.*" />
+          <option name="PATTERN" value="com.jy.cluster.centroids.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -64,12 +93,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KmeansTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.jy.test.KmeansTest" />
+    <configuration name="MeansTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jy.cluster.test.MeansTest" />
       <module name="cluster-kmeans" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.jy.test.*" />
+          <option name="PATTERN" value="com.jy.cluster.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -92,7 +121,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.KmeansTest" />
+        <item itemvalue="Application.MeansTest" />
         <item itemvalue="Application.InitCentroidsFactory" />
       </list>
     </recent_temporary>
@@ -113,7 +142,7 @@
       <workItem from="1653911921238" duration="3761000" />
       <workItem from="1653997384520" duration="3450000" />
       <workItem from="1654085004815" duration="2064000" />
-      <workItem from="1654169063337" duration="2338000" />
+      <workItem from="1654169063337" duration="4355000" />
     </task>
     <task id="LOCAL-00001" summary="java实现聚类k-means算法">
       <created>1653794374800</created>
@@ -213,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654085723152</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="聚类效果：轮廓系数">
+      <created>1654171539118</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1654171539118</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,23 +275,24 @@
     <MESSAGE value="将每个簇距离质心最远的样本挑出，随机作为空簇的质心" />
     <MESSAGE value="余弦相似度有bug" />
     <MESSAGE value="切比雪夫距离算法" />
-    <option name="LAST_COMMIT_MESSAGE" value="切比雪夫距离算法" />
+    <MESSAGE value="聚类效果：轮廓系数" />
+    <option name="LAST_COMMIT_MESSAGE" value="聚类效果：轮廓系数" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/test/KmeansTest.java</url>
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java</url>
           <line>72</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/ClusterSimpleKm.java</url>
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java</url>
           <line>338</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/effect/SseMethod.java</url>
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/effect/SseMethod.java</url>
           <line>44</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
