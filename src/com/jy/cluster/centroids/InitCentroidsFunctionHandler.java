@@ -23,8 +23,10 @@ public interface InitCentroidsFunctionHandler {
      *        聚簇个数
      * @param clusterDataMap
      *        初始化聚类数据
+     * @param distanceCalcType
+     *        距离方法类型
      * @return
      *        初始化质心集合
      */
-    List<List<Double>> initCentroids(List<List<Double>> dataList, int seed, int numClusters, Map<Integer, List<List<Double>>> clusterDataMap);
+    List<List<Double>> initCentroids(List<List<Double>> dataList, int seed, int numClusters, Map<Integer, List<List<Double>>> clusterDataMap,String distanceCalcType);
 }

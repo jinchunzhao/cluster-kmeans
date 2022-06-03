@@ -4,7 +4,9 @@ import com.jy.cluster.plugin.ClusterArithmeticRegion;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 欧氏距离算法执行器接口实现类
@@ -18,12 +20,12 @@ public class EuclideanDistance implements DistanceFunctionHandler {
 
 
     @Override
-    public List<Double> toDistance(List<Double> dataList, List<List<Double>> pointList) {
+    public List<Double> getDataToPointsDistance(List<Double> dataList, List<List<Double>> pointList) {
         return toEuclideanDistance(dataList, pointList);
     }
 
     @Override
-    public Double toClusterInstanceOrder(List<Double> dataList, List<Double> points) {
+    public Double getClusterInstanceOrderDistance(List<Double> dataList, List<Double> points) {
         return toEuclideanDistanceOrder(dataList, points);
     }
 
@@ -41,6 +43,28 @@ public class EuclideanDistance implements DistanceFunctionHandler {
         double sqrt = Math.sqrt(Math.abs(reduce));
         double distance = BigDecimal.valueOf(sqrt).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         return distance;
+    }
+
+    @Override
+    public Map<Integer, Double> getInitCentroidsDistance(List<Double> firstPoints, List<List<Double>> dataList) {
+
+        Map<Integer,Double> distanceMap = new HashMap<>();
+        for (int i = 0; i < dataList.size(); i++) {
+
+            List<Double> distancePowList = new ArrayList<>();
+
+            List<Double> dataItems = dataList.get(i);
+            for (int j = 0; j < dataItems.size(); j++) {
+                Double data = dataItems.get(j);
+                Double firstPoint = firstPoints.get(j);
+                distancePowList.add(euclideanDistancePow(firstPoint, data));
+            }
+
+            // 数据求和
+            Double reduce = listElementSum(distancePowList);
+            distanceMap.put(i,euclideanDistancesSqrt(reduce));
+        }
+        return distanceMap;
     }
 
 

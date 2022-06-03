@@ -192,7 +192,7 @@ public class ClusterSimpleKm {
         }
         InitCentroidsFactory centroidsFactory = InitCentroidsFactory.getInstance();
         InitCentroidsFunctionHandler invokeHandler = centroidsFactory.getHandler(this.getInitCentroidsType());
-        List<List<Double>> initCentroids = invokeHandler.initCentroids(dataList, this.seed, this.numClusters, CLUSTER_DATA_MAP);
+        List<List<Double>> initCentroids = invokeHandler.initCentroids(dataList, this.seed, this.numClusters, CLUSTER_DATA_MAP,this.distanceCalcType);
 
         POINTS_CACHE.addAll(initCentroids);
         INIT_POINTS.addAll(initCentroids);
@@ -273,7 +273,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
-                Double f = distanceHandler.toClusterInstanceOrder(dataList, points);
+                Double f = distanceHandler.getClusterInstanceOrderDistance(dataList, points);
                 orderItemMap.put(j, f);
             }
             List<Map.Entry<Integer, Double>> orderList = orderItemMap.entrySet().stream()
@@ -295,7 +295,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < orderClusterList.size(); j++) {
                 List<Double> dataList = orderClusterList.get(j);
-                Double f = distanceHandler.toClusterInstanceOrder(dataList, points);
+                Double f = distanceHandler.getClusterInstanceOrderDistance(dataList, points);
                 orderItemMap.put(i+","+j, f);
             }
 
@@ -363,7 +363,7 @@ public class ClusterSimpleKm {
             // 根据不同类型的距离算法计算最小误差
             for (int j = 0; j < clusterDataList.size(); j++) {
                 List<Double> dataList = clusterDataList.get(j);
-                Double f = distanceHandler.toClusterInstanceOrder(dataList, points);
+                Double f = distanceHandler.getClusterInstanceOrderDistance(dataList, points);
                 orderItemMap.put(j, f);
             }
             List<Map.Entry<Integer, Double>> orderList = orderItemMap.entrySet().stream()
@@ -390,7 +390,7 @@ public class ClusterSimpleKm {
      */
     private Double dataClassify(List<Double> dataList, DistanceFunctionHandler distanceHandler, SseMethod sseMethod) {
 
-        List<Double> distanceList = distanceHandler.toDistance(dataList, POINTS_CACHE);
+        List<Double> distanceList = distanceHandler.getDataToPointsDistance(dataList, POINTS_CACHE);
 
         // 获取集合中最新值的下标
         OptionalInt optionalInt = IntStream.range(0, distanceList.size())

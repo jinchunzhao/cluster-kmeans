@@ -1,6 +1,7 @@
 package com.jy.cluster.distance;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 距离方法执行器接口
@@ -23,6 +24,7 @@ public interface DistanceFunctionHandler {
     default Double listElementSum(List<Double> Doubles){
         return Doubles.stream().reduce(0.00, Double::sum);
     }
+
     /**
      * 通过曼哈顿距离算法实现最小误差的计算
      *
@@ -30,8 +32,9 @@ public interface DistanceFunctionHandler {
      *        元数据
      * @param pointList
      *        中心点集合
+     * @return 距离
      */
-    List<Double> toDistance(List<Double> dataList, List<List<Double>> pointList);
+    List<Double> getDataToPointsDistance(List<Double> dataList, List<List<Double>> pointList);
 
     /**
      * 根据距离算法将根据数据离质心的距离远近进行排序。距离近的排到前面
@@ -43,7 +46,7 @@ public interface DistanceFunctionHandler {
      * @return
      *        最小误差
      */
-    Double toClusterInstanceOrder(List<Double> dataList,List<Double> points);
+    Double getClusterInstanceOrderDistance(List<Double> dataList,List<Double> points);
 
     /**
      * 获取样本间的距离
@@ -56,4 +59,17 @@ public interface DistanceFunctionHandler {
      *        距离
      */
     Double getAmongSampleDistance(List<Double> dataList1, List<Double> dataList2);
+
+    /**
+     * 获取初始化质心数据类型
+     *
+     *
+     * @param firstPoints
+     *        第一个质心
+     * @param dataList
+     *        元数据
+     * @return
+     *        数据类型
+     */
+    Map<Integer,Double> getInitCentroidsDistance(List<Double> firstPoints,List<List<Double>> dataList);
 }

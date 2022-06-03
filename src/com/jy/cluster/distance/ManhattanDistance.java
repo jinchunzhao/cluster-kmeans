@@ -4,7 +4,9 @@ import com.jy.cluster.plugin.ClusterArithmeticRegion;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 曼哈顿距离算法执行器接口实现类
@@ -17,12 +19,12 @@ import java.util.List;
 public class ManhattanDistance implements DistanceFunctionHandler {
 
     @Override
-    public List<Double> toDistance(List<Double> dataList, List<List<Double>> pointList) {
+    public List<Double> getDataToPointsDistance(List<Double> dataList, List<List<Double>> pointList) {
         return toManhattanDistance(dataList, pointList);
     }
 
     @Override
-    public Double toClusterInstanceOrder(List<Double> dataList, List<Double> points) {
+    public Double getClusterInstanceOrderDistance(List<Double> dataList, List<Double> points) {
         return toManhattanDistanceOrder(dataList, points);
     }
 
@@ -41,6 +43,26 @@ public class ManhattanDistance implements DistanceFunctionHandler {
         BigDecimal distanceAverage = new BigDecimal(sum / list.size());
         double distance = distanceAverage.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         return distance;
+    }
+
+    @Override
+    public Map<Integer, Double> getInitCentroidsDistance(List<Double> firstPoints, List<List<Double>> dataList) {
+        Map<Integer,Double> distanceMap = new HashMap<>();
+        for (int i = 0; i < dataList.size(); i++) {
+
+            List<Double> list = new ArrayList<>();
+
+            List<Double> dataItems = dataList.get(i);
+            for (int j = 0; j < dataItems.size(); j++) {
+                Double firstPoint = firstPoints.get(j);
+                Double data = dataItems.get(j);
+                double v = Math.abs(firstPoint - data);
+                list.add(v);
+            }
+            // 数据求和
+            distanceMap.put(i,listElementSum(list));
+        }
+        return distanceMap;
     }
 
 

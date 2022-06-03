@@ -3,7 +3,9 @@ package com.jy.cluster.distance;
 import com.jy.cluster.plugin.ClusterArithmeticRegion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 切比雪夫距离
@@ -15,12 +17,12 @@ import java.util.List;
 @ClusterArithmeticRegion(factionType = "chebyshevDistance")
 public class ChebyshevDistance implements DistanceFunctionHandler {
     @Override
-    public List<Double> toDistance(List<Double> dataList, List<List<Double>> pointList) {
+    public List<Double> getDataToPointsDistance(List<Double> dataList, List<List<Double>> pointList) {
         return toChebyshevDistance(dataList, pointList);
     }
 
     @Override
-    public Double toClusterInstanceOrder(List<Double> dataList, List<Double> points) {
+    public Double getClusterInstanceOrderDistance(List<Double> dataList, List<Double> points) {
         return toManhattanDistanceOrder(dataList, points);
     }
 
@@ -36,6 +38,26 @@ public class ChebyshevDistance implements DistanceFunctionHandler {
         }
         // 获取最大值
         return list.stream().mapToDouble(item -> item).max().getAsDouble();
+    }
+
+    @Override
+    public Map<Integer, Double> getInitCentroidsDistance(List<Double> firstPoints, List<List<Double>> dataList) {
+        Map<Integer,Double> distanceMap = new HashMap<>();
+        for (int i = 0; i < dataList.size(); i++) {
+
+            List<Double> list = new ArrayList<>();
+
+            List<Double> dataItems = dataList.get(i);
+            for (int j = 0; j < dataItems.size(); j++) {
+                Double firstPoint = firstPoints.get(j);
+                Double data = dataItems.get(j);
+                double v = Math.abs(firstPoint - data);
+                list.add(v);
+            }
+            double max = list.stream().mapToDouble(item -> item).max().getAsDouble();
+            distanceMap.put(i,max);
+        }
+        return distanceMap;
     }
 
 
