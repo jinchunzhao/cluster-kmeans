@@ -3,7 +3,6 @@ package com.jy.cluster.centroids;
 import com.jy.cluster.distance.DistanceFunctionFactory;
 import com.jy.cluster.distance.DistanceFunctionHandler;
 import com.jy.cluster.plugin.ClusterArithmeticRegion;
-import com.jy.cluster.utils.MapUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ public class FarthestDistanceCentroids implements InitCentroidsFunctionHandler {
             numClusters--;
 
             Map<Integer, Double> distanceMap = distanceHandler.getInitCentroidsDistance(firstPoint, dataList);
-            List<Map.Entry<Integer, Double>> entries = MapUtil.orderMapValue(distanceMap);
+            List<Map.Entry<Integer, Double>> entries = orderMapValue(distanceMap);
             // 最远的距离
             Map.Entry<Integer, Double> entry = entries.get(entries.size() - 1);
             Integer index = entry.getKey();
