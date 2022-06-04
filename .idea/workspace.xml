@@ -6,11 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="移除多余工具类">
+    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="优化最远距离算法">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/centroids/RandomCentroids.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/RandomCentroids.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/effect/SseMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/effect/SseMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +43,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.22229868" />
     <property name="project.structure.side.proportion" value="0.7637168" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -81,15 +79,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -119,7 +115,9 @@
       <workItem from="1654085004815" duration="2064000" />
       <workItem from="1654169063337" duration="5250000" />
       <workItem from="1654244602413" duration="3465000" />
-      <workItem from="1654329140575" duration="2287000" />
+      <workItem from="1654329140575" duration="2487000" />
+      <workItem from="1654331647409" duration="30000" />
+      <workItem from="1654331689128" duration="1701000" />
     </task>
     <task id="LOCAL-00001" summary="java实现聚类k-means算法">
       <created>1653794374800</created>
@@ -254,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654248052318</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="优化最远距离算法">
+      <created>1654331472100</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1654331472100</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +290,8 @@
     <MESSAGE value="参数名" />
     <MESSAGE value="最远距离选择初始化质心" />
     <MESSAGE value="移除多余工具类" />
-    <option name="LAST_COMMIT_MESSAGE" value="移除多余工具类" />
+    <MESSAGE value="优化最远距离算法" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化最远距离算法" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -302,23 +308,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java</url>
-          <line>545</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java</url>
           <line>181</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/effect/SilhouetteCoefficient.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

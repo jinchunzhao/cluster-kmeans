@@ -1,6 +1,7 @@
 package com.jy.cluster.effect;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,12 +38,13 @@ public class SseMethod {
             return Double.NaN;
         }
         double sum = 0.00;
+        List<Double> list = new ArrayList<Double>();
         for (int i = 0; i < dataList.size(); i++) {
             Double data = dataList.get(i);
             Double point = points.get(i);
-            sum += Math.pow(data-point, 2);
+            list.add(Math.pow(data-point, 2));
         }
-        return sum;
+        return list.stream().mapToDouble(item->item).min().getAsDouble();
     }
 
 

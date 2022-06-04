@@ -94,6 +94,9 @@ public class SilhouetteCoefficient {
 //                    return v;
 //                }).collect(Collectors.toList());
 //                double clusterIn = list1.stream().mapToDouble(item->item).min().getAsDouble();
+        if (clusterIns.size() <= 0){
+            return 0.0;
+        }
         Double sumIn = clusterIns.stream().reduce(0.00, Double::sum);
         BigDecimal clusterInAverage = new BigDecimal(sumIn / clusterIns.size());
         double clusterIn = clusterInAverage.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();

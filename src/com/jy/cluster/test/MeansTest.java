@@ -67,7 +67,7 @@ public class MeansTest {
     public static void main(String[] args) {
         String distanceType = DistanceFunctionEnum.EUCLIDEAN_DISTANCE.getCode();
         Integer maxIterations = 100;
-        int k = 3;
+        int k = 26;
 
 
         List<List<Double>> dataList = loadData();
@@ -78,7 +78,7 @@ public class MeansTest {
 
         clusterSimpleKm.setDistanceCalcType(distanceType);
         clusterSimpleKm.setPreserveInstancesOrder(true);
-        clusterSimpleKm.setInitCentroidsType(InitCentroidsEnum.FARTHEST_FIRST.getCode());
+        clusterSimpleKm.setInitCentroidsType(InitCentroidsEnum.RANDOM.getCode());
 //        clusterSimpleKm.setSeed(100);
 
 
