@@ -27,18 +27,24 @@ public class FarthestDistanceCentroids implements InitCentroidsFunctionHandler {
         int r = random.nextInt(dataSize - 1);
         List<Double> firstPoint = dataList.get(r);
         points.add(firstPoint);
+
         DistanceFunctionFactory functionFactory = DistanceFunctionFactory.getInstance();
         DistanceFunctionHandler distanceHandler = functionFactory.getHandler(distanceCalcType);
         numClusters--;
+        clusterDataMap.put(numClusters, new ArrayList<>());
+        List<Double> currentPoints = new ArrayList<>();
+        currentPoints.addAll(firstPoint);
         do {
             numClusters--;
-
-            Map<Integer, Double> distanceMap = distanceHandler.getInitCentroidsDistance(firstPoint, dataList);
+            clusterDataMap.put(numClusters, new ArrayList<>());
+            Map<Integer, Double> distanceMap = distanceHandler.getInitCentroidsDistance(currentPoints, dataList);
             List<Map.Entry<Integer, Double>> entries = orderMapValue(distanceMap);
             // 最远的距离
             Map.Entry<Integer, Double> entry = entries.get(entries.size() - 1);
             Integer index = entry.getKey();
             List<Double> nextPoints = dataList.get(index);
+            currentPoints.clear();
+            currentPoints.addAll(nextPoints);
             points.add(nextPoints);
         } while (numClusters > 0);
         return points;

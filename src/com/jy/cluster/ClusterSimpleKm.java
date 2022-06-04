@@ -49,7 +49,7 @@ public class ClusterSimpleKm {
     private String distanceCalcType = DistanceFunctionEnum.EUCLIDEAN_DISTANCE.getCode();
 
     /**
-     * 初始化质心算法类型
+     * 初始化质心算法类型，默认为：随机
      */
     private String initCentroidsType = InitCentroidsEnum.RANDOM.getCode();
 
@@ -57,11 +57,6 @@ public class ClusterSimpleKm {
      * 随机数种子.种子固定后，即使是随机算法也可以确定性地运行。默认为：10
      */
     private Integer seed = 10;
-
-    /**
-     * 初始化中心点方法类型。默认为：随机
-     */
-    private Integer initializationPointType = 0;
 
     /**
      * 是否对簇中实例进行排序（按距离质心的远近）
@@ -108,14 +103,6 @@ public class ClusterSimpleKm {
 
     public void setInitCentroidsType(String initCentroidsType) {
         this.initCentroidsType = initCentroidsType;
-    }
-
-    public Integer getInitializationPointType() {
-        return initializationPointType;
-    }
-
-    public void setInitializationPointType(Integer initializationPointType) {
-        this.initializationPointType = initializationPointType;
     }
 
     public Integer getSeed() {
@@ -392,7 +379,7 @@ public class ClusterSimpleKm {
 
         List<Double> distanceList = distanceHandler.getDataToPointsDistance(dataList, POINTS_CACHE);
 
-        // 获取集合中最新值的下标
+        // 获取集合中最小值的下标
         OptionalInt optionalInt = IntStream.range(0, distanceList.size())
                 .reduce((i, j) -> distanceList.get(i) > distanceList.get(j) ? j : i);
         Double squaredSumError = null;

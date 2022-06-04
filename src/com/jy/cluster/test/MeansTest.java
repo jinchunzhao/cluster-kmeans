@@ -2,6 +2,7 @@ package com.jy.cluster.test;
 
 import com.jy.cluster.ClusterSimpleKm;
 import com.jy.cluster.enums.DistanceFunctionEnum;
+import com.jy.cluster.enums.InitCentroidsEnum;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,7 +22,7 @@ import java.util.Objects;
  */
 public class MeansTest {
 
-    private static final String FILE_PATH = System.getProperty("user.dir") + "\\src\\com\\jy\\test\\data.csv";
+    private static final String FILE_PATH = System.getProperty("user.dir") + "\\src\\com\\jy\\cluster\\test\\data.csv";
     /**
      * 读取文件中的数据存入map中(  位数不够的化，补0)
      */
@@ -77,7 +78,7 @@ public class MeansTest {
 
         clusterSimpleKm.setDistanceCalcType(distanceType);
         clusterSimpleKm.setPreserveInstancesOrder(true);
-//        clusterSimpleKm.setInitializationPointType(RANDOM);
+        clusterSimpleKm.setInitCentroidsType(InitCentroidsEnum.FARTHEST_FIRST.getCode());
 //        clusterSimpleKm.setSeed(100);
 
 

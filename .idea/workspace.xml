@@ -6,16 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="参数名">
-      <change afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/jy/cluster/utils/MapUtil.java" afterDir="false" />
+    <list default="true" id="4d946c89-54fb-4593-9bf4-e07d7c4d8136" name="Default Changelist" comment="移除多余工具类">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/centroids/InitCentroidsFunctionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/InitCentroidsFunctionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/distance/ChebyshevDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/ChebyshevDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/distance/DistanceFunctionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/DistanceFunctionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/distance/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/EuclideanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/distance/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/distance/ManhattanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/centroids/RandomCentroids.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/centroids/RandomCentroids.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,13 +81,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -120,7 +118,8 @@
       <workItem from="1653997384520" duration="3450000" />
       <workItem from="1654085004815" duration="2064000" />
       <workItem from="1654169063337" duration="5250000" />
-      <workItem from="1654244602413" duration="3104000" />
+      <workItem from="1654244602413" duration="3465000" />
+      <workItem from="1654329140575" duration="2287000" />
     </task>
     <task id="LOCAL-00001" summary="java实现聚类k-means算法">
       <created>1653794374800</created>
@@ -241,7 +240,21 @@
       <option name="project" value="LOCAL" />
       <updated>1654173597709</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="最远距离选择初始化质心">
+      <created>1654247732275</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1654247732275</updated>
+    </task>
+    <task id="LOCAL-00019" summary="移除多余工具类">
+      <created>1654248052318</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1654248052318</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,25 +283,42 @@
     <MESSAGE value="聚类效果：轮廓系数" />
     <MESSAGE value="修改包路径" />
     <MESSAGE value="参数名" />
-    <option name="LAST_COMMIT_MESSAGE" value="参数名" />
+    <MESSAGE value="最远距离选择初始化质心" />
+    <MESSAGE value="移除多余工具类" />
+    <option name="LAST_COMMIT_MESSAGE" value="移除多余工具类" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/jy/cluster/test/MeansTest.java</url>
-          <line>72</line>
+          <line>73</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java</url>
-          <line>338</line>
+          <line>325</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jy/cluster/effect/SseMethod.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="8" />
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java</url>
+          <line>545</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/ClusterSimpleKm.java</url>
+          <line>181</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/jy/cluster/centroids/FarthestDistanceCentroids.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

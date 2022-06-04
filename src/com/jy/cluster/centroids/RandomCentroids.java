@@ -19,7 +19,7 @@ public class RandomCentroids implements InitCentroidsFunctionHandler {
 
 
     @Override
-    public List<List<Double>> initCentroids(List<List<Double>> dataList, int seed, int numClusters, Map<Integer, List<List<Double>>> clusterDataMap) {
+    public List<List<Double>> initCentroids(List<List<Double>> dataList, int seed, int numClusters, Map<Integer, List<List<Double>>> clusterDataMap,String distanceCalcType) {
         return randomCenterPoint(dataList, seed, numClusters, clusterDataMap);
     }
 
