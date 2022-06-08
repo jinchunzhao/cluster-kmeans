@@ -1,10 +1,14 @@
 package com.jy.cluster.distance;
 
+import com.jy.cluster.centroids.InitCentroidsFunctionHandler;
 import com.jy.cluster.enums.DistanceFunctionEnum;
 import com.jy.cluster.plugin.ClusterArithmeticRegion;
+import com.jy.cluster.utils.FileUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,7 +37,7 @@ public class DistanceFunctionFactory {
     private DistanceFunctionFactory() {
         try {
             initHandlerMap();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,14 +81,13 @@ public class DistanceFunctionFactory {
      *
      * @throws ClassNotFoundException 未找到类
      */
-    private void initHandlerMap() throws ClassNotFoundException {
+    private void initHandlerMap() throws ClassNotFoundException, IOException {
 
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator + SCAN_PACKAGE.replace(".", File.separator);
-        File file = new File(path);
-        String[] files = file.list();
-        for (String str : files) {
-            String forName = SCAN_PACKAGE + "." + str.replace(".java", "");
-            Class<? extends DistanceFunctionHandler> clazz = (Class<? extends DistanceFunctionHandler>) Class.forName(forName);
+        List<String> fileClassNames = FileUtil.getFileClassNames(SCAN_PACKAGE);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        for (String className : fileClassNames) {
+            //装载class
+            Class<? extends DistanceFunctionHandler> clazz = (Class<? extends DistanceFunctionHandler>) classLoader.loadClass(SCAN_PACKAGE + "." + className);
             if (clazz.isAnnotationPresent(ClusterArithmeticRegion.class)){
                 ClusterArithmeticRegion annotation = clazz.getAnnotation(ClusterArithmeticRegion.class);
                 HANDLER_MAP.put(annotation.factionType(), clazz);
