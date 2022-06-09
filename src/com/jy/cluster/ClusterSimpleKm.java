@@ -11,7 +11,9 @@ import com.jy.cluster.enums.InitCentroidsEnum;
 import com.jy.cluster.utils.ListUtil;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -535,6 +537,27 @@ public class ClusterSimpleKm {
         }
     }
 
+    /**
+     * 获取簇中实例的分布情况
+     *
+     * @return
+     *        簇中实例的分布情况
+     */
+    private Map<Integer, String> getClusteredInstances() {
+        Collection<List<List<Double>>> values = CLUSTER_DATA_MAP.values();
+        int count = values.stream().map(List::size).reduce(0, Integer::sum);
+        DecimalFormat format = new DecimalFormat("0.0%");
+        Map<Integer, String> map = new LinkedHashMap<>();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < POINTS_CACHE.size(); i++) {
+            int dataSize = CLUSTER_DATA_MAP.get(i).size();
+            double v = (double) dataSize / (double)count;
+            builder.append(dataSize).append("（").append(format.format(v)).append("）");
+            map.put(i, builder.toString());
+            builder.setLength(0);
+        }
+        return map;
+    }
 
     /**
      * 简单K-means聚类算法运用
@@ -553,6 +576,7 @@ public class ClusterSimpleKm {
         resultMap.put("initCentroids", this.initCentroidsType);
         resultMap.put("distanceCalcType",this.distanceCalcType);
         resultMap.put("silhouetteCoefficient",this.silhouetteCoefficient);
+        resultMap.put("clusteredInstances",this.getClusteredInstances());
         resultMap.put("initialStartPoints", INIT_POINTS);
         resultMap.put("clusterCentroids", POINTS_CACHE);
         resultMap.put("clusterData", CLUSTER_DATA_MAP);
